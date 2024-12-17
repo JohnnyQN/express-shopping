@@ -87,31 +87,26 @@ describe("DELETE /items/:name", function () {
 
 /** GET /items/search - search items */
 describe("GET /items/search", function () {
-    test("Searches for items by name", async function () {
-      console.log("Testing search with existing item...");
-      const response = await request(app).get("/items/search?name=silly");
-      console.log("Test Response (Matching Item):", response.body); // Debugging log
-      expect(response.statusCode).toBe(200); // Expect 200 when an item is found
-      expect(response.body.items).toHaveLength(1); // Ensure only one match
-      expect(response.body.items[0].name).toBe("silly");
-    });
-  
-    test("Responds with empty array if no matching items", async function () {
-      console.log("Testing search with no matches...");
-      const response = await request(app).get("/items/search?name=nonexistent");
-      console.log("Test Response (No Matches):", response.body); // Debugging log
-      expect(response.statusCode).toBe(200); // Should be 200 with empty results
-      expect(response.body.items).toHaveLength(0); // No items found
-    });
-  
-    test("Responds with 400 for missing query", async function () {
-      console.log("Testing search with missing query...");
-      const response = await request(app).get("/items/search");
-      console.log("Test Response (Missing Query):", response.body); // Debugging log
-      expect(response.statusCode).toBe(400); // Ensure 400 is returned
-      expect(response.body.error).toBe("Search query is required");
-    });
+  test("Searches for items by name", async function () {
+    const response = await request(app).get("/items/search?name=silly");
+    expect(response.statusCode).toBe(200);
+    expect(response.body.items).toHaveLength(1);
+    expect(response.body.items[0].name).toBe("silly");
   });
+
+  test("Responds with empty array if no matching items", async function () {
+    const response = await request(app).get("/items/search?name=nonexistent");
+    expect(response.statusCode).toBe(200);
+    expect(response.body.items).toHaveLength(0);
+  });
+
+  test("Responds with 400 for missing query", async function () {
+    const response = await request(app).get("/items/search");
+    expect(response.statusCode).toBe(400);
+    expect(response.body.error).toBe("Search query is required");
+  });
+});
+
   
   
   

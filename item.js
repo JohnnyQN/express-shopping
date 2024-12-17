@@ -41,10 +41,11 @@ class Item {
   }
 
   static search(query) {
+    // No NotFoundError thrown here; it just filters
     return items.filter(item =>
       item.name.toLowerCase().includes(query.toLowerCase())
     );
-  }
+  } 
   
   static clear() {
     items.length = 0; // Clear all items

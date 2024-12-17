@@ -11,6 +11,7 @@ app.use('/items', itemsRoutes);
 
 // 404 handler - for routes not found
 app.use(function (req, res, next) {
+  console.log(`${req.method} ${req.url}`);
   res.status(404).json({ error: "Not Found" });
 });
 

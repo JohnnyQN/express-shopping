@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const itemsController = require('../controllers/itemsController');
 
+/** GET /items/search - search items */
+router.get('/search', itemsController.searchItems);
+
 /** GET /items - get all items */
 router.get('/', itemsController.getItems);
 
@@ -16,8 +19,5 @@ router.patch('/:name', itemsController.updateItem);
 
 /** DELETE /items/:name - delete a single item */
 router.delete('/:name', itemsController.deleteItem);
-
-/** GET /items/search - search items */
-router.get('/search', itemsController.searchItems);
 
 module.exports = router;

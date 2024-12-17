@@ -53,25 +53,19 @@ const deleteItem = (req, res, next) => {
 
 /** GET /items/search - search items by name */
 const searchItems = (req, res, next) => {
-  console.log("Incoming request to /items/search");
   try {
     const query = req.query.name?.trim();
-    console.log("Search query:", query);
+    console.log("Search Query:", query);
 
-    // Return 400 for missing or empty query
     if (!query) {
-      console.log("Missing or empty query");
       return res.status(400).json({ error: "Search query is required" });
     }
 
-    // Perform the search
     const results = Item.search(query);
-    console.log("Search results:", results);
+    console.log("Search Results:", results);
 
-    // Return results (empty or matched)
-    return res.json({ items: results });
+    return res.status(200).json({ items: results });
   } catch (err) {
-    console.error("Error in /items/search:", err.message);
     return next(err);
   }
 };
